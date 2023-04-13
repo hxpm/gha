@@ -1,0 +1,34 @@
+name: check-commit
+
+on:
+    - workflow_call
+
+jobs:
+    check-commit:
+        name: Commit
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+
+              with:
+                  fetch-depth: 0
+
+            - uses: actions/cache@v3
+
+              with:
+                  key: ${{ github.job }}-${{ hashFiles('package-lock.json') }}
+
+            - uses: actions/setup-node@v3
+
+              with:
+                  node-version: 19
+
+            - name: Install dependencies
+
+              run: npm install
+
+            - name: Check commit
+
+              run: npx commitlint --from=HEAD~1 --to HEAD --verbose
