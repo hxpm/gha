@@ -20,6 +20,8 @@ jobs:
               with:
                   key: ${{ github.job }}-${{ hashFiles('package-lock.json') }}
 
+                  path: node_modules/
+
             - uses: actions/setup-node@v3
 
               with:
