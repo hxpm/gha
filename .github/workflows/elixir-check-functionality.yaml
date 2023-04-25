@@ -89,7 +89,7 @@ jobs:
                    run \
                      -e MIX_ENV=test \
                      ${{ inputs.docker-service }} \
-                     mix ecto.migrate
+                     mix do ecto.create, ecto.migrate
 
             - name: Run unit tests
 
